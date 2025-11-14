@@ -1,18 +1,14 @@
 {
   "builds": [
     {
-      "src": "localeventproject/wsgi.py",
+      "src": "index.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
       "src": "/(.*)",
-      "dest": "localeventproject/wsgi.py"
+      "dest": "index.py"
     }
   ]
 }
