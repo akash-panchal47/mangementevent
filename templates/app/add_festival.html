@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Add Festival | CityPulse{% endblock %}
+
+{% block content %}
+<section id="add-festival" class="py-5 mt-5" style="background: rgba(255, 100, 4, 0.05);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0 animate__animated animate__fadeInUp" style="border-radius: 15px; background: rgba(255, 255, 255, 0.95);">
+          <div class="card-body p-4">
+            <h3 class="fw-bold text-center mb-3 text-orange">ADD FESTIVAL</h3>
+            <p class="text-muted text-center mb-4">
+              Share details about your festival or celebration so others can join!
+            </p>
+
+            <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+
+              <!-- Festival Name -->
+              <div class="mb-3">
+                {{ form.name.label_tag }}
+                {{ form.name|add_class:"form-control" }}
+                {{ form.name.errors }}
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description|add_class:"form-control" }}
+                {{ form.description.errors }}
+              </div>
+
+              <!-- Date -->
+              <div class="mb-3">
+                {{ form.date.label_tag }}
+                {{ form.date|add_class:"form-control" }}
+                {{ form.date.errors }}
+              </div>
+
+              <!-- Location -->
+              <div class="mb-3">
+                {{ form.location.label_tag }}
+                {{ form.location|add_class:"form-control" }}
+                {{ form.location.errors }}
+              </div>
+
+              <!-- Organizer -->
+              <div class="mb-3">
+                {{ form.organizer.label_tag }}
+                {{ form.organizer|add_class:"form-control" }}
+                {{ form.organizer.errors }}
+              </div>
+
+              <!-- Upload Image -->
+              <div class="mb-3">
+                {{ form.image.label_tag }}
+                {{ form.image|add_class:"form-control" }}
+                {{ form.image.errors }}
+              </div>
+
+              <!-- Submit / Cancel -->
+              <div class="d-flex justify-content-between mt-4">
+                <button type="submit" class="btn btn-orange px-4 shadow-sm">Submit</button>
+                <a href="{% url 'festivals' %}" class="btn btn-secondary px-4 shadow-sm">Cancel</a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.card {
+  border-radius: 15px;
+}
+
+.btn-orange {
+  background-color: #ff6404;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-orange:hover {
+  background-color: #e55a03;
+  color: #fff;
+}
+
+@media (max-width: 575.98px) {
+  .card-body {
+    padding: 20px;
+  }
+
+  .btn-orange, .btn-secondary {
+    width: 48%;
+    font-size: 0.9rem;
+  }
+}
+</style>
+{% endblock %}

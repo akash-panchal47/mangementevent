@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Payment Receipt | CityPulse{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+
+      <!-- Invoice Card -->
+      <div class="card py-5 shadow-lg rounded-4 border-0">
+        <div class="card-header bg-orange text-white d-flex justify-content-between align-items-center">
+          <div>
+            <img src="{% static 'app/events/images/logo.jpg.png' %}" alt="CityPulse Logo" style="height:50px;">
+          </div>
+          <h4 class="mb-0 fw-bold">Payment Receipt</h4>
+          <div></div>
+        </div>
+
+        <div class="card-body">
+          <div class="row mb-4">
+            <!-- User Info -->
+            <div class="col-md-6 mb-3">
+              <h5 class="fw-bold text-orange">User Details</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Username:</strong> {{ registration.user.username }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ registration.user.email }}</li>
+                <li class="list-group-item"><strong>Date Joined:</strong> {{ registration.user.date_joined|date:"M d, Y" }}</li>
+              </ul>
+            </div>
+
+            <!-- Event & Payment Info -->
+            <div class="col-md-6 mb-3">
+              <h5 class="fw-bold text-orange">Event & Payment Details</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Event:</strong> {{ registration.event.title }}</li>
+                <li class="list-group-item"><strong>Date:</strong> {{ registration.event.date }}</li>
+                <li class="list-group-item"><strong>Status:</strong> 
+                  {% if registration.status == 'accepted' %}
+                    <span class="badge bg-success">Paid</span>
+                  {% else %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                  {% endif %}
+                </li>
+                <li class="list-group-item"><strong>Amount:</strong> ₹ {{ registration.event.price|default:"0" }}</li>
+                <li class="list-group-item"><strong>Payment Date:</strong> {{ registration.created_at|date:"M d, Y H:i" }}</li>
+                <li class="list-group-item"><strong>Receipt ID:</strong> {{ registration.id }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Signature Section -->
+          <div class="row mt-5">
+            <div class="col-6 text-start">
+              <p class="mb-1 fw-bold">Authorized Signature</p>
+              <hr style="width:150px; border-top:2px solid #ff6600;">
+            </div>
+            <div class="col-6 text-end">
+              <p class="mb-1 fw-bold">Customer</p>
+              <hr style="width:150px; border-top:2px solid #ff6600; margin-left:auto;">
+            </div>
+          </div>
+
+          <!-- Print Button -->
+          <div class="text-center mt-4">
+            <button onclick="window.print()" class="btn btn-orange fw-bold">
+              <i class="bi bi-printer"></i> Print Receipt
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-orange {
+    background-color: rgba(255, 102, 0, 0.9) !important;
+  }
+  .list-group-item {
+    border: 1px solid #dee2e6;
+  }
+  @media (max-width: 576px) {
+    .row > [class*="col-"] {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+{% endblock %}

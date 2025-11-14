@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Pay & Join Event | CityPulse{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card py-5 shadow-sm p-4" style="border-radius: 15px; background: #fff;">
+                <h2 class="fw-bold text-center text-orange mb-3">Joining Event</h2>
+                <h4 class="text-center mb-4">{{ event.title }}</h4>
+                <p class="text-center mb-3"><strong>Amount:</strong> ₹{{ event.entry_fee }}</p>
+
+                {% if error %}
+                    <div class="alert alert-danger text-center">
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form method="POST" action="{% url 'join_event' event.id %}" class="text-center">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-lg shadow-sm">
+        Pay & Join Event
+    </button>
+</form>
+
+
+                <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-secondary w-100 mt-3">
+                    ← Back to Event
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Joined Event | CityPulse{% endblock %}
+
+{% block content %}
+<section class="py-5 min-vh-100 d-flex align-items-center" style="background: #fdf5ef;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0 rounded-4 text-center p-5 animate__animated animate__fadeInUp">
+          
+          <!-- Success Icon -->
+          <div class="mb-4">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          </div>
+
+          <!-- Success Message -->
+          <h2 class="fw-bold text-success mb-3">You’ve Successfully Joined!</h2>
+          <p class="text-muted mb-4">
+            🎉 You have joined <strong>{{ event.title }}</strong>.  
+            Stay tuned for updates and enjoy the event!
+          </p>
+
+          <!-- Event Quick Info -->
+          <div class="text-start bg-light rounded-3 p-3 shadow-sm mb-4">
+            <p class="mb-2"><strong>Date:</strong> {{ event.date|date:"F j, Y" }}</p>
+            <p class="mb-2"><strong>Time:</strong> {{ event.date|time:"g:i A" }}</p>
+            <p class="mb-2"><strong>Location:</strong> {{ event.location }}</p>
+            <p class="mb-0"><strong>Entry Fee:</strong> 
+              {% if event.entry_fee > 0 %}
+                ₹{{ event.entry_fee }}
+              {% else %}
+                Free
+              {% endif %}
+            </p>
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex gap-3 justify-content-center">
+            <a href="{% url 'dashboard' %}" class="btn btn-success fw-semibold px-4">
+              Go to Dashboard
+            </a>
+            <a href="{% url 'event_detail' event.id %}" class="btn btn-outline-secondary fw-semibold px-4">
+              Back to Event
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Custom Styles -->
+<style>
+.text-orange { color: #ff6600; }
+</style>
+{% endblock %}

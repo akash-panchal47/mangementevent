@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5 my-5">
+    <h2 class="mb-4">Edit Event: {{ event.title }}</h2>
+
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Title</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Date</label>
+                {{ form.date }}
+                {{ form.date.errors }}
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label fw-semibold">Time</label>
+                {{ form.time }}
+                {{ form.time.errors }}
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Location</label>
+                {{ form.location }}
+                {{ form.location.errors }}
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label fw-semibold">Entry Fee</label>
+                {{ form.entry_fee }}
+                {{ form.entry_fee.errors }}
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-semibold">Description</label>
+                {{ form.description }}
+                {{ form.description.errors }}
+            </div>
+
+            <div class="col-12">
+                <label class="form-label fw-semibold">Upload Image</label>
+                {{ form.image }}
+                {{ form.image.errors }}
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-orange btn-lg shadow-sm">Save Changes</button>
+            <a href="{% url 'event_detail' event.id %}" class="btn btn-secondary btn-lg shadow-sm">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.btn-orange {
+    background-color: #ff6404;
+    color: #fff;
+    font-weight: 600;
+}
+.btn-orange:hover {
+    background-color: #e55a03;
+}
+</style>
+{% endblock %}

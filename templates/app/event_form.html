@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Add Event | CityPulse{% endblock %}
+
+{% block content %}
+<section id="add-event" class="py-5 mt-5" style="background: rgba(255, 100, 4, 0.05);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="card shadow-lg border-0 animate__animated animate__fadeInUp" style="border-radius: 15px; background: rgba(255, 255, 255, 0.95);">
+          <div class="card-body p-4">
+            <h3 class="fw-bold text-center mb-3 text-orange">ADD EVENT</h3>
+            <p class="text-muted text-center mb-4">
+              Share details about your festival or celebration so others can join!
+            </p>
+
+            <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+              {% csrf_token %}
+              {{ form.non_field_errors }}
+
+              <!-- Event Title -->
+              <div class="mb-3">
+                {{ form.title.label_tag }}
+                {{ form.title|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.title.errors }}
+              </div>
+
+              <!-- Event Date -->
+              <div class="mb-3">
+                {{ form.date.label_tag }}
+                {{ form.date|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.date.errors }}
+              </div>
+
+              <!-- Event Time -->
+              <div class="mb-3">
+                {{ form.time.label_tag }}
+                {{ form.time|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.time.errors }}
+              </div>
+
+              <!-- Event Location -->
+              <div class="mb-3">
+                {{ form.location.label_tag }}
+                {{ form.location|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.location.errors }}
+              </div>
+
+              <!-- Entry Fee -->
+              <div class="mb-3">
+                {{ form.entry_fee.label_tag }}
+                {{ form.entry_fee|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.entry_fee.errors }}
+              </div>
+
+              <!-- Event Description -->
+              <div class="mb-3">
+                {{ form.description.label_tag }}
+                {{ form.description|add_class:"form-control form-control-lg shadow-sm" }}
+                {{ form.description.errors }}
+              </div>
+
+              <!-- Event Image -->
+              <div class="mb-3">
+                {{ form.image.label_tag }}
+                {{ form.image|add_class:"form-control form-control-lg" }}
+                {{ form.image.errors }}
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-orange w-100 py-2 fw-semibold shadow-sm">
+                Submit Event
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

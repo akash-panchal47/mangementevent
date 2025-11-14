@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Login | CityPulse{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light min-vh-100 d-flex align-items-center">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-6 col-sm-9">
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+          <div class="card-header text-center bg-gradient py-4" style="background: linear-gradient(135deg, #ff6404, #ffb347);">
+            <h2 class="text-white fw-bold mb-0">Welcome Back</h2>
+            <p class="text-white-50 small mb-0">Login to access your account</p>
+          </div>
+          <div class="card-body p-4">
+
+            {% if error %}
+              <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <label for="username" class="form-label fw-semibold">Username</label>
+                <input type="text" id="username" name="username" class="form-control form-control-lg shadow-sm rounded-pill" placeholder="Enter username" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label fw-semibold">Password</label>
+                <input type="password" id="password" name="password" class="form-control form-control-lg shadow-sm rounded-pill" placeholder="Enter password" required>
+              </div>
+
+              <button type="submit" class="btn btn-gradient w-100 py-2 fw-bold text-white" 
+                      style="background: linear-gradient(135deg, #ff6404, #ffb347); transition: all 0.3s;">
+                Login
+              </button>
+            </form>
+
+            <!-- Extra Links -->
+            <div class="text-center mt-4">
+              <p class="small mb-1 text-muted">
+                Don’t have an account? 
+                <a href="{% url 'register' %}" class="text-orange fw-semibold">Register</a>
+              </p>
+              <a href="{% url 'password_reset' %}" class="small text-muted">Forgot Password?</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

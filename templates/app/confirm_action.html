@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Confirm Action | CityPulse{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4">
+        <h3 class="fw-bold text-center text-orange mb-4">Confirm {{ action|title }} User</h3>
+        <p class="text-center">Are you sure you want to <strong>{{ action }}</strong> the user <strong>{{ registration.user.username }}</strong> for the event <strong>{{ registration.event.title }}</strong>?</p>
+        
+        <form method="POST" class="d-flex justify-content-between mt-4">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-{{ action == 'accept' and 'success' or 'danger' }} w-45">{{ action|title }}</button>
+          <a href="{% url 'dashboard' %}" class="btn btn-secondary w-45">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.text-orange { color: #ff6600; }
+.card { border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+.btn.w-45 { width: 48%; }
+</style>
+{% endblock %}

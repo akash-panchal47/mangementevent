@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Pass - {{ event.title }}</title>
+    <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .pass-card {
+            border: 2px solid #ff6600;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            text-align: center;
+        }
+        .pass-card h2 { color: #ff6600; }
+        .pass-card p { margin: 5px 0; }
+        .pass-code { font-size: 20px; font-weight: bold; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="pass-card">
+        <img src="{% static 'app/events/logo.jpg.png' %}" alt="CityPulse Logo" style="height:50px; margin-bottom:15px;">
+        <h2>{{ event.title }}</h2>
+        <p><strong>Username:</strong> {{ registration.user.username }}</p>
+        <p><strong>Email:</strong> {{ registration.user.email }}</p>
+        <p><strong>Date:</strong> {{ event.date|date:"M j, Y" }}</p>
+        <div class="pass-code">Pass Code: {{ registration.pass_code }}</div>
+    </div>
+</body>
+</html>

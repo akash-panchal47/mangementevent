@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Register | CityPulse{% endblock %}
+
+{% block content %}
+<section class="py-5 bg-light min-vh-100 d-flex align-items-center">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-sm-9">
+        <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+          <div class="card-header text-center bg-gradient py-4" style="background: linear-gradient(135deg, #ff6404, #ffb347);">
+            <h2 class="text-white fw-bold mb-0">Create Account</h2>
+            <p class="text-white-50 small mb-0">Join CityPulse to explore and share events</p>
+          </div>
+          <div class="card-body p-4">
+
+            {% if form.errors %}
+              <div class="alert alert-danger">
+                <ul class="mb-0">
+                  {% for field in form %}
+                    {% for error in field.errors %}
+                      <li>{{ error }}</li>
+                    {% endfor %}
+                  {% endfor %}
+                  {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            <form method="post" novalidate>
+              {% csrf_token %}
+
+              <div class="mb-3">
+                {{ form.username.label_tag }}
+                {{ form.username|add_class:"form-control form-control-lg shadow-sm rounded-pill" }}
+              </div>
+
+              <div class="mb-3">
+                {{ form.email.label_tag }}
+                {{ form.email|add_class:"form-control form-control-lg shadow-sm rounded-pill" }}
+              </div>
+
+              <div class="mb-3">
+                {{ form.password1.label_tag }}
+                {{ form.password1|add_class:"form-control form-control-lg shadow-sm rounded-pill" }}
+              </div>
+
+              <div class="mb-3">
+                {{ form.password2.label_tag }}
+                {{ form.password2|add_class:"form-control form-control-lg shadow-sm rounded-pill" }}
+              </div>
+
+              <button type="submit" class="btn btn-gradient w-100 py-2 fw-bold text-white" 
+                      style="background: linear-gradient(135deg, #ff6404, #ffb347); transition: all 0.3s;">
+                Register
+              </button>
+            </form>
+
+            <div class="text-center mt-4">
+              <p class="small mb-0 text-muted">
+                Already have an account?
+                <a href="{% url 'login' %}" class="text-orange fw-semibold">Login</a>
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

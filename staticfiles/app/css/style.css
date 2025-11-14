@@ -1,0 +1,180 @@
+/* =====================
+   General Styles
+===================== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  scroll-behavior: smooth;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+/* Navbar */
+.navbar {
+  transition: all 0.3s ease;
+}
+.navbar .nav-link {
+  font-weight: 500;
+  margin-left: 10px;
+  transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+  color: #2563eb !important;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #2563eb !important;
+}
+
+/* =====================
+   Hero Section
+===================== */
+.hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  animation: slideshow 18s infinite ease-in-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes slideshow {
+  0% { background-image: url("../events/img1.jpg"); }
+  33% { background-image: url("../events/img2.jpg"); }
+  66% { background-image: url("../events/img3.jpg"); }
+  100% { background-image: url("../events/img5.jpg"); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  animation: fadeInUp 1.5s ease-out;
+}
+.hero-content p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  animation: fadeInUp 2s ease-out;
+}
+.hero-content a {
+  animation: fadeInUp 2.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =====================
+   Category Cards
+===================== */
+.category-card {
+  border: none;
+  border-radius: 15px;
+  padding: 25px;
+  color: white;
+  background: linear-gradient(135deg, #2563eb, #9333ea);
+  transition: all 0.3s ease;
+}
+.category-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+}
+
+/* =====================
+   Event Cards
+===================== */
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+.card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* =====================
+   Forms (Login/Register/Contact)
+===================== */
+form input, form textarea {
+  border-radius: 12px !important;
+  padding: 12px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+form input:focus, form textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 6px rgba(37,99,235,0.4);
+}
+
+.btn-primary {
+  border-radius: 30px;
+  font-weight: 600;
+  background: linear-gradient(to right, #2563eb, #9333ea);
+  border: none;
+  transition: all 0.3s;
+}
+.btn-primary:hover {
+  background: linear-gradient(to right, #1d4ed8, #7e22ce);
+  transform: translateY(-2px);
+}
+
+/* =====================
+   Newsletter
+===================== */
+#newsletter {
+  background: linear-gradient(to right, #2563eb, #9333ea);
+}
+#newsletter input[type="email"] {
+  border-radius: 30px;
+  border: none;
+  padding: 12px 20px;
+}
+#newsletter button {
+  border-radius: 30px;
+}
+
+/* =====================
+   Footer
+===================== */
+footer {
+  background: #fff;
+  color: #333;
+  border-top: 1px solid #eee;
+}
+
+/* =====================
+   Responsive
+===================== */
+@media (max-width: 768px) {
+  .hero-content h1 { font-size: 2rem; }
+  .hero-content p { font-size: 1rem; }
+}
