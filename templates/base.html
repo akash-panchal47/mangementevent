@@ -4,167 +4,169 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}CityPulse{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'app/css/bootstrap.min.css' %}">
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+
+    <!-- Icons / Animate -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
+
 <body>
 
-  <!-- Navbar -->
+<!-- ===================== NAVBAR ===================== -->
 {% if not request.path == '/dashboard/' %}
-<nav class="navbar fixed-top">
-  <!-- Brand -->
-  <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
-    <img src="{% static 'app/images/logo.jpg.png' %}" 
-         alt="CityPulse Logo" 
-         class="d-inline-block align-top" 
-         style="height:40px; width:auto;">
-    <span class="ms-2 fw-bold text-white"> CityPulse </span>
-  </a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container">
 
-  <!-- Toggler (hamburger menu) -->
-  <button class="navbar-toggler" onclick="toggleMenu()">☰</button>
+        <!-- Brand -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+            <img src="{% static 'app/images/logo.png' %}"
+                 alt="CityPulse Logo"
+                 style="height:40px; width:auto;">
+            <span class="ms-2 fw-bold">CityPulse</span>
+        </a>
 
-  <!-- Nav Links -->
-  <ul class="navbar-nav" id="navMenu">
-    <!-- Always visible links -->
-    <li class="nav-item">
-      <a href="{% url 'index' %}" 
-         class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
-         Home
-      </a>
-    </li>
-    
-    <li class="nav-item">
-      <a href="{% url 'festivals' %}" 
-         class="nav-link {% if request.resolver_match.url_name == 'festivals' %}active{% endif %}">
-         Today Festivals
-      </a>
-    </li>
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <li class="nav-item">
-      <a href="{% url 'contact' %}" 
-         class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-         Contact
-      </a>
-    </li>
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-        <li class="nav-item">
-      <a href="{% url 'dashboard' %}" 
-         class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
-         Join Event
-      </a>
-    </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                       href="{% url 'index' %}">Home</a>
+                </li>
 
-    {% if user.is_authenticated %}
-        {% if user.is_superuser %}
-            <!-- Superuser sees Add Event / Add Festival / Logout -->
-             <li class="nav-item">
-              <a href="{% url 'admin_dashboard' %}" class="nav-link">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'add_event' %}" class="nav-link">Add Event</a>
-            </li>
-            <li class="nav-item">
-              <a href="{% url 'add_festival' %}" class="nav-link">Add Festival</a>
-            </li>
-        {% endif %}
-        <!-- Logout for all logged-in users -->
-        <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
-    {% else %}
-        <!-- Guest links -->
-        <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Login</a></li>
-       <!-- <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">SignUp</a></li> -->
-    {% endif %}
-  </ul>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'festivals' %}active{% endif %}"
+                       href="{% url 'festivals' %}">Today Festivals</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
+                       href="{% url 'contact' %}">Contact</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+                       href="{% url 'dashboard' %}">Join Event</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'admin_dashboard' %}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'add_event' %}">Add Event</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'add_festival' %}">Add Festival</a></li>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
 </nav>
 {% endif %}
+<!-- ================= END NAVBAR ===================== -->
 
-<!-- Hero Section with Slideshow -->
 
-  <!-- Main Content -->
-  <div>
+<!-- ===================== CONTENT ===================== -->
+<div style="padding-top: 80px;">
     {% block content %}
-
-
     {% endblock %}
-  </div>
-
- {% if not request.path == '/dashboard/' %}
- {% if not request.path == '/payment_receipt/' %}
- <footer class="footer pt-5 pb-3 bg-dark text-light">
-  <div class="container">
-    <div class="row gy-4">
-
-      <!-- Brand / About -->
-      <div class="col-md-4">
-        <h4 class="text-orange fw-bold">CityPulse</h4>
-        <p class="small text-light-50">
-          CityPulse is a web platform to explore and celebrate local events and festivals in your city. Users can view upcoming events, add new events or festivals, and stay updated on today’s celebrations.
-        </p>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="col-md-4">
-        <h5 class="fw-semibold text-orange">Quick Links</h5>
-        <ul class="list-unstyled">
-         <ul class="list-unstyled">
-  <li>
-    <a href="{% url 'index' %}" class="footer-link text-light text-decoration-none">
-      <i class="bi bi-house-door-fill me-1"></i> Home
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'add_event' %}" class="footer-link text-light text-decoration-none">
-      <i class="bi bi-plus-circle-fill me-1"></i> Add Event
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'contact' %}" class="footer-link text-light text-decoration-none">
-      <i class="bi bi-envelope-fill me-1"></i> Contact
-    </a>
-  </li>
-  <li>
-    <a href="{% url 'login' %}" class="footer-link text-light text-decoration-none">
-      <i class="bi bi-box-arrow-in-right me-1"></i> Login
-    </a>
-  </li>
-</ul>
-</ul>
 </div>
 
-      <!-- Newsletter / Social -->
-      <div class="col-md-4">
-        <h5 class="fw-semibold text-orange">Stay Connected</h5>
-        <form method="post" action="{% url 'subscribe' %}" class="d-flex flex-column flex-sm-row gap-2 mt-2">
-          {% csrf_token %}
-          <input type="email" name="email" class="form-control newsletter-input shadow-sm rounded-pill" placeholder="Enter your email" required>
-          <button type="submit" class="btn btn-orange shadow-sm rounded-pill">Subscribe</button>
-        </form>
 
-        <div class="social-icons mt-3">
-          <a href="#" class="text-light me-2 fs-5"><i class="bi bi-facebook"></i></a>
-          <a href="#" class="text-light me-2 fs-5"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="text-light me-2 fs-5"><i class="bi bi-twitter"></i></a>
-          <a href="#" class="text-light fs-5"><i class="bi bi-youtube"></i></a>
+<!-- ===================== FOOTER ===================== -->
+{% if not request.path == '/dashboard/' %}
+{% if not request.path == '/payment_receipt/' %}
+
+<footer class="footer pt-5 pb-3 bg-dark text-light">
+    <div class="container">
+        <div class="row gy-4">
+
+            <!-- Brand -->
+            <div class="col-md-4">
+                <h4 class="text-orange fw-bold">CityPulse</h4>
+                <p class="small text-light-50">
+                    CityPulse is a web platform to explore and celebrate local events.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-4">
+                <h5 class="fw-semibold text-orange">Quick Links</h5>
+                <ul class="list-unstyled">
+
+                    <li><a href="{% url 'index' %}" class="footer-link text-light text-decoration-none">
+                        <i class="bi bi-house-door-fill me-1"></i> Home</a>
+                    </li>
+
+                    <li><a href="{% url 'add_event' %}" class="footer-link text-light text-decoration-none">
+                        <i class="bi bi-plus-circle-fill me-1"></i> Add Event</a>
+                    </li>
+
+                    <li><a href="{% url 'contact' %}" class="footer-link text-light text-decoration-none">
+                        <i class="bi bi-envelope-fill me-1"></i> Contact</a>
+                    </li>
+
+                    <li><a href="{% url 'login' %}" class="footer-link text-light text-decoration-none">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Login</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="col-md-4">
+                <h5 class="fw-semibold text-orange">Stay Connected</h5>
+                <form method="post" action="{% url 'subscribe' %}"
+                      class="d-flex flex-column flex-sm-row gap-2 mt-2">
+                    {% csrf_token %}
+                    <input type="email" name="email" class="form-control rounded-pill"
+                           placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn-orange rounded-pill">Subscribe</button>
+                </form>
+
+                <div class="social-icons mt-3">
+                    <a href="#" class="text-light me-2 fs-5"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light me-2 fs-5"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-light me-2 fs-5"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-light fs-5"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+
         </div>
-      </div>
 
+        <!-- Bottom -->
+        <div class="text-center mt-4 pt-3 border-top border-light-25">
+            <p class="small mb-0">© 2025 CityPulse. All rights reserved.</p>
+        </div>
     </div>
-
-    <!-- Bottom Bar -->
-    <div class="text-center mt-4 pt-3 border-top border-light-25">
-      <p class="small mb-0">© 2025 CityPulse. All rights reserved.</p>
-    </div>
-  </div>
 </footer>
-{% endif %}
-{% endif %}
-  <script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'app/js/script.js' %}"></script>
 
+{% endif %}
+{% endif %}
+<!-- ================= END FOOTER ===================== -->
+
+
+<!-- ===================== SCRIPTS ===================== -->
+
+<!-- Bootstrap Bundle -->
+<script src="{% static 'app/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'app/js/script.js' %}"></script>
 
 </body>
 </html>
