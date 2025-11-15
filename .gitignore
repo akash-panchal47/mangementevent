@@ -1,17 +1,5 @@
-# Python cache
-__pycache__/
-*.pyc
-
-# Django specific
-*.log
-*.sqlite3
-db.sqlite3
-media/
-staticfiles/
-
-# Environment
 .env
-
-# IDEs
-.vscode/
-.idea/
+*.pyc
+__pycache__/
+db.sqlite3
+/staticfiles
