@@ -30,7 +30,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", ".onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware", 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -139,7 +140,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS =(os.path.join(BASE_DIR,"static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
@@ -174,3 +175,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 INSTAMOJO_API_KEY = "53916a4219d77147ae4044a133bd1059"
 INSTAMOJO_AUTH_TOKEN = "96c8fe9d41c94e9f80ef74475b65b002"
 INSTAMOJO_ENDPOINT = "https://www.instamojo.com/api/1.1/"
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
