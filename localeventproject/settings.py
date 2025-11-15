@@ -24,10 +24,11 @@ load_dotenv(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ac%mr2fai)g6f6w1ddvre4fx^!d^$y#^d9csyzt(l&p^#1n%-f'
-
+# SECRET_KEY = 'django-insecure-ac%mr2fai)g6f6w1ddvre4fx^!d^$y#^d9csyzt(l&p^#1n%-f'
+SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-secret")
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -82,8 +83,9 @@ WSGI_APPLICATION = 'localeventproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
 if DATABASE_URL:
-    # Use Neon PostgreSQL on Vercel
+    # Use PostgreSQL on Vercel (Neon or other hosted DB)
     DATABASES = {
         "default": dj_database_url.config(
             default=DATABASE_URL,
@@ -99,6 +101,7 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
 
 
 # Password validation
