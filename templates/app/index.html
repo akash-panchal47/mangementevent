@@ -6,11 +6,11 @@
 <header class="hero">
   <style>
     @keyframes slideshow {
-      0%   { background-image: url("{% static 'app/events/images/picture1.jpg' %}"); }
-      25%  { background-image: url("{% static 'app/events/images/picture2.jpg' %}"); }
-      50%  { background-image: url("{% static 'app/events/images/picture3.jpg' %}"); }
-      75%  { background-image: url("{% static 'app/events/images/picture4.jpg' %}"); }
-      100% { background-image: url("{% static 'app/events/images/picture7.jpg' %}"); }
+      0%   { background-image: url("{% static 'app/images/picture1.jpg' %}"); }
+      25%  { background-image: url("{% static 'app/images/picture2.jpg' %}"); }
+      50%  { background-image: url("{% static 'app/images/picture3.jpg' %}"); }
+      75%  { background-image: url("{% static 'app/images/picture4.jpg' %}"); }
+      100% { background-image: url("{% static 'app/images/picture7.jpg' %}"); }
     }
 
     .hero {
@@ -227,7 +227,7 @@
           {% if event.image %}
             <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
           {% else %}
-            <img src="{% static 'images/default-event.jpg' %}" class="card-img-top" alt="Default Event">
+            <img src="{% static 'app/images/default-event.jpg' %}" class="card-img-top" alt="Default Event">
           {% endif %}
 
           <div class="card-body d-flex flex-column">
@@ -259,7 +259,7 @@
           {% if event.image %}
             <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}">
           {% else %}
-            <img src="{% static 'images/default-event.jpg' %}" class="card-img-top" alt="Default Event">
+            <img src="{% static 'app/images/default-event.jpg' %}" class="card-img-top" alt="Default Event">
           {% endif %}
 
           <div class="card-body d-flex flex-column">
